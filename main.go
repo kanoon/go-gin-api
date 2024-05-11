@@ -1,6 +1,8 @@
 package main
 
 import (
+	"demo-api/routes"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -10,11 +12,8 @@ func main() {
 
 	r.Use(cors.Default())
 
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	
+	routes.UserRoute(r)
 
-	r.Run(":8001") // listen and serve on 0.0.0.0:8080
+	r.Run(":8001") 
 }
