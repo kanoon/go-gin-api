@@ -1,6 +1,7 @@
 package main
 
 import (
+	"demo-api/config"
 	"demo-api/routes"
 
 	"github.com/gin-contrib/cors"
@@ -10,8 +11,9 @@ import (
 func main() {
     r := gin.Default()
 
-	r.Use(cors.Default())
+	config.Connect()
 
+	r.Use(cors.Default())
 	
 	routes.UserRoute(r)
 
