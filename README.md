@@ -17,3 +17,9 @@ go run .\main.go
 docker build -t my-go-app .
 docker run -p 8001:8001 my-go-app
 ```
+
+### Build DB and API
+
+```
+docker-compose up --build
+```

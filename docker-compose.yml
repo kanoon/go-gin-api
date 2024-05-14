@@ -10,3 +10,24 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=test1234
       - POSTGRES_DB=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=test1234
+      - DB_NAME=postgres
+    depends_on:
+      db:
+        condition: service_healthy
