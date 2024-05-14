@@ -1,7 +1,15 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"demo-api/config"
+	"demo-api/models"
+
+	"github.com/gin-gonic/gin"
+)
 
 func UserController(c *gin.Context){
-	c.String(200, "Hello user!")
+	users := []models.User{}
+	config.DB.Find(&users)
+	c.JSON(200, &users)
+	// c.String(200, "Hello user!")
 }
